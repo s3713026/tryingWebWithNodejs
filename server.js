@@ -21,8 +21,8 @@ app.post('/messages',(req,res)=>{
     // io.emit('message',req.body)
     res.sendStatus(200)
 })
-app.get('/au_code',(req,res)=>{
-    res.send(JSON.stringify(req.params))
+app.get('/',(req,res)=>{
+    console.log(window.location.href)
 })
 
 // io.on('connection',(socket)=>{

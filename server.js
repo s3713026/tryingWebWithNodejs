@@ -27,7 +27,7 @@ app.get('/',(req,res)=>{
         }
     }
 
-    header(access_token,(err,res)=>{
+    http(access_token,(err,res)=>{
         if (err) throw new Error(error);
     // json data
     // parse json
@@ -64,7 +64,7 @@ function processFile(token) {
       }
     };
   
-    header(get_OA_info, function (error, response) {
+    http(get_OA_info, function (error, response) {
       if (error) throw new Error(error);
       var resultJSON2 = JSON.parse(response.body);
       var jsonContent2 = JSON.stringify(resultJSON2);

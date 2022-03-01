@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
         console.log(response.body);
         var messages =[{
             au_code: get_authorization_code,
-            ac_token:response.body,},
+            ac_token:response.bodyParser.access_token,},
         ]
         res.send(messages)
     });

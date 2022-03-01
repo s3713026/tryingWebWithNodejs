@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
             'rf_token': rf_token
         }
         res.send(messages)
-        fs.writeFile("accesstoken.json", messages, function (err) {
+        fs.writeFile("accesstoken.json", JSON.stringify(messages), function (err) {
             if (err) {
                 return console.log(err);
             }

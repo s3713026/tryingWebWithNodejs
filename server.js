@@ -82,7 +82,7 @@ app.get('/follower',(req,res)=>{
           request(options2, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body)
-            var userid = JSON.parse(response.body).user_id;
+            var userid = JSON.parse(response.body).followers[0].user_id;
             var iduser = {"user_id":userid}
             res.send(iduser)
           });

@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     console.log("Authorization Code: " + get_authorization_code);
     // res.send(get_authorization_code);
 
-    var ac_token = ""
+    
     var options = {
         'method': 'POST',
         'url': 'https://oauth.zaloapp.com/v4/oa/access_token',
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
         if (error) throw new Error(error);
         console.log(response.body);
         var infor = JSON.parse(response.body);
-        ac_token = infor.access_token
+        var ac_token = infor.access_token
         var rf_token = infor.refresh_token
         var messages = {
             'au_code': get_authorization_code,
@@ -47,27 +47,26 @@ app.get('/', (req, res) => {
             'rf_token': rf_token
         }
         res.send(messages)
-     
+        var option_follower = {
+            'method': 'GET',
+            'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
+            'headers': {
+                'access_token': ac_token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "offset": 0,
+                "count": 10
+            })
+        };
+        request2(option_follower, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+            res.send(JSON.stringify(response.body))
+            
+        });
     });
 
-    var option_follower = {
-        'method': 'GET',
-        'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
-        'headers': {
-            'access_token': ac_token,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "offset": 0,
-            "count": 10
-        })
-    };
-    request2(option_follower, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-        res.send(JSON.stringify(response.body))
-        
-    });
 })
 
 

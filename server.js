@@ -35,11 +35,8 @@ app.get('/', (req, res) => {
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
-        var messages =[{
-            au_code: get_authorization_code,
-            ac_token:response.bodyParser.access_token,},
-        ]
-        res.send(messages)
+    
+        res.send(response.body.access_token)
     });
 })
 

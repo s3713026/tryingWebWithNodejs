@@ -4,13 +4,10 @@ const { header } = require('express/lib/request')
 const { response } = require('express')
 var app = express()
 var http = require('http').Server(app)
-var request1 = require('request');
-var request2 = require('request');
 // var io = require('socket.io')(3000)
 // app.use(express.static(__dirname))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(bodyParser.urlencoded({extended:false}))
 
 app.get('/', (req, res) => {
     var url_page = req.query;
@@ -20,7 +17,7 @@ app.get('/', (req, res) => {
     console.log("Authorization Code: " + get_authorization_code);
     // res.send(get_authorization_code);
 
-    
+    var request = require('request');
     var options = {
         'method': 'POST',
         'url': 'https://oauth.zaloapp.com/v4/oa/access_token',
@@ -35,41 +32,20 @@ app.get('/', (req, res) => {
             'grant_type': 'authorization_code'
         }
     };
-    request1(options, function (error, response) {
+    request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
         var infor = JSON.parse(response.body);
         var ac_token = infor.access_token
         var rf_token = infor.refresh_token
-        var messages = {
+        var messages ={
             'au_code': get_authorization_code,
             'ac_token': ac_token,
             'rf_token': rf_token
         }
         res.send(messages)
-        var option_follower = {
-            'method': 'GET',
-            'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
-            'headers': {
-                'access_token': ac_token,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "offset": 0,
-                "count": 10
-            })
-        };
-        request2(option_follower, function (error, response) {
-            if (error) throw new Error(error);
-            console.log(response.body);
-            res.send(JSON.stringify(response.body))
-            
-        });
     });
-
 })
-
-
 
 
 

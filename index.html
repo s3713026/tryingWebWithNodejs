@@ -11,7 +11,7 @@
     <div class="jumbotron">
         <h1 class="display-4">Table information</h1>
         <br>
-        <table>
+        <table border="1">
             <tr>
                 <td>Authorization code</td>
                 <td id="au_code"></td>
@@ -43,7 +43,7 @@
 
     function getMessages(){
         $.get('/',(data)=>{
-            data.forEach(addMessages);
+            addMessages(data)
         })
     }
     

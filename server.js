@@ -57,6 +57,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/follower',(req,res)=>{
+    var request = require('request');
     fs.readFile('accesstoken.json', 'utf8' , (err, data) => {
         if (err) {
           console.error(err)

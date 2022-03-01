@@ -43,7 +43,9 @@ app.get('/', (req, res) => {
             'ac_token': ac_token,
             'rf_token': rf_token
         }
-        res.send(messages)
+        app.get('/messages',(req,res)=>{
+            res.send(messages)
+        })
     });
 })
 

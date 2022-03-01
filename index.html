@@ -42,7 +42,7 @@
     })
 
     function getMessages(){
-        $.get(window.location.href,(data)=>{
+        $.get('/messages',(data)=>{
             addMessages(data)
         })
     }

@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
             'rf_token': rf_token
         }
         res.send(messages)
-        fs.writeFile("/files/accesstoken.json", ac_token, function (err) {
+        fs.writeFile("accesstoken.json", ac_token, function (err) {
             if (err) {
                 return console.log(err);
             }
@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
         });
     });
 
-    fs.readFile('/files/accesstoken.json', 'utf8' , (err, data) => {
+    fs.readFile('accesstoken.json', 'utf8' , (err, data) => {
         if (err) {
           console.error(err)
           return

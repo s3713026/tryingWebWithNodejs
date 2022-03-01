@@ -112,7 +112,7 @@ app.get('/profile', (req, res) => {
             console.log(userdata)
             console.log("read file userid success")
             JSON.parse(userdata).forEach(element => {
-                console.log("PRINT" + element)
+                console.log("PRINT" + JSON.parse(element))
                 var options = {
                     'method': 'GET',
                     'url': 'https://openapi.zalo.me/v2.0/oa/getprofile',
@@ -120,7 +120,7 @@ app.get('/profile', (req, res) => {
                         'Content-Type': 'application/json',
                         'access_token': JSON.parse(data).ac_token
                     },
-                    body: JSON.stringify({
+                    body:({
                         element
                     })
             

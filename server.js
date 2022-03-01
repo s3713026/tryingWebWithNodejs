@@ -2,6 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 const { header } = require('express/lib/request')
 const { response } = require('express')
+const { info } = require('console')
 var app = express()
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
@@ -35,9 +36,16 @@ app.get('/', (req, res) => {
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
-    
-        res.send(JSON.parse(response.body).access_token)
+        var infor = JSON.parse(response.body);
+        var ac_token = infor.access_token
+        var rf_token = infor.refresh_token
     });
+    var messages ={
+        'au_code': get_authorization_code,
+        'ac_token': ac_token,
+        'rf_token': rf_token
+    }
+    res.send(messages)
 })
 
 

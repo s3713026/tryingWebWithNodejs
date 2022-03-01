@@ -3,11 +3,12 @@ var bodyParser = require('body-parser')
 const { header } = require('express/lib/request')
 const { response } = require('express')
 var app = express()
+const fs = require('fs');
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
 // app.use(express.static(__dirname))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
     var url_page = req.query;
@@ -38,12 +39,19 @@ app.get('/', (req, res) => {
         var infor = JSON.parse(response.body);
         var ac_token = infor.access_token
         var rf_token = infor.refresh_token
-        var messages ={
+        var messages = {
             'au_code': get_authorization_code,
             'ac_token': ac_token,
             'rf_token': rf_token
         }
         res.send(messages)
+        fs.writeFile("/accesttoken", ac_token, function (err) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("The file was saved!");
+            res.send(ac_token)
+        });
     });
 })
 

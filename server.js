@@ -77,8 +77,8 @@ app.get('/', (req, res) => {
           };
           request(options2, function (error, response) {
             if (error) throw new Error(error);
+            console.log(response.body)
             res.send(JSON.parse(response.body).user_id);
-            res.send(JSON.parse(response.body).total);
           });
         
       })

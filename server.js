@@ -110,7 +110,7 @@ app.get('/profile', (req, res) => {
                 return
             }
             console.log("read file userid success")
-            userdata.forEach(element => {
+            JSON.parse(userdata).forEach(element => {
                 console.log("PRINT" + element)
                 var options = {
                     'method': 'GET',

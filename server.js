@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
     console.log("Authorization Code: " + get_authorization_code);
     // res.send(get_authorization_code);
 
+    var ac_token = ""
     var options = {
         'method': 'POST',
         'url': 'https://oauth.zaloapp.com/v4/oa/access_token',
@@ -38,7 +39,7 @@ app.get('/', (req, res) => {
         if (error) throw new Error(error);
         console.log(response.body);
         var infor = JSON.parse(response.body);
-        var ac_token = infor.access_token
+        ac_token = infor.access_token
         var rf_token = infor.refresh_token
         var messages = {
             'au_code': get_authorization_code,

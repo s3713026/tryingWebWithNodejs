@@ -4,6 +4,7 @@ const { header } = require('express/lib/request')
 const { response } = require('express')
 var app = express()
 var http = require('http').Server(app)
+var request = require('request');
 // var io = require('socket.io')(3000)
 // app.use(express.static(__dirname))
 app.use(bodyParser.json())
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
     console.log("Authorization Code: " + get_authorization_code);
     // res.send(get_authorization_code);
 
-    var request = require('request');
+    
     var options = {
         'method': 'POST',
         'url': 'https://oauth.zaloapp.com/v4/oa/access_token',

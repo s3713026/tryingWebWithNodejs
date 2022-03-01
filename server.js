@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
           };
           request(options2, function (error, response) {
             if (error) throw new Error(error);
-            res.send(JSON.stringify(response.body));
+            console.log(JSON.stringify(response.body));
           });
         
       })

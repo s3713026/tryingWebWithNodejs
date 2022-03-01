@@ -58,6 +58,7 @@ app.get('/', (req, res) => {
           console.error(err)
           return
         }
+        console.log("read file success")
         var options2 = {
             'method': 'GET',
             'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
@@ -75,7 +76,7 @@ app.get('/', (req, res) => {
             if (error) throw new Error(error);
             console.log(response.body);
           });
-        console.log("read file success")
+        
       })
 })
 

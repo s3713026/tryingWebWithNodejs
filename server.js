@@ -83,7 +83,7 @@ app.get('/follower',(req,res)=>{
             if (error) throw new Error(error);
             console.log(response.body)
             var uid = JSON.parse(response.body).followers
-            res.send(JSON.stringify(uid[0]))
+            res.send(JSON.stringify(uid))
           });
       })
 })

@@ -13,6 +13,7 @@ var http = require('http').Server(app)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+// Lấy token
 app.get('/', (req, res) => {
     var url_page = req.query;
     var string = JSON.stringify(url_page);
@@ -57,6 +58,7 @@ app.get('/', (req, res) => {
     });
 })
 
+// Lấy id người quan tâm
 app.get('/follower',(req,res)=>{
     var request = require('request');
     fs.readFile('accesstoken.json', 'utf8' , (err, data) => {
@@ -82,7 +84,7 @@ app.get('/follower',(req,res)=>{
           request(options2, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body)
-            var uid = JSON.parse(response.body).data.followers[0]
+            var uid = JSON.parse(response.body).data.followers
             res.send(JSON.stringify(uid))
           });
       })

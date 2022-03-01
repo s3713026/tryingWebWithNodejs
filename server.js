@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
             'grant_type': 'authorization_code'
         }
     };
-    request1(options, function (error, response,next) {
+    request1(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
         var infor = JSON.parse(response.body);
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
             'rf_token': rf_token
         }
         res.send(messages)
-        next()
+     
     });
 
     var option_follower = {
@@ -62,11 +62,11 @@ app.get('/', (req, res) => {
             "count": 10
         })
     };
-    request2(option_follower, function (error, response,next) {
+    request2(option_follower, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
         res.send(JSON.stringify(response.body))
-        next()
+        
     });
 })
 

@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
         if (error) throw new Error(error);
         console.log(response.body);
     
-        res.send(response.body.access_token)
+        res.send(JSON.stringify(response.body.access_token))
     });
 })
 

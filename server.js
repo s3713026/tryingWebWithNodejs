@@ -86,7 +86,7 @@ app.get('/follower', (req, res) => {
             console.log(response.body)
             var uid = JSON.parse(response.body).data.followers
             res.send(JSON.stringify(uid))
-            fs.writeFile("userid.json", JSON.stringify(messages), function (err) {
+            fs.writeFile("userid.json", JSON.stringify(uid), function (err) {
                 if (err) {
                     return console.log(err);
                 }

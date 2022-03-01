@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
         });
     });
 
-    fs.readFile('/files/accesstoken.txt', 'utf8' , (err, data) => {
+    fs.readFile('/files/accesstoken.json', 'utf8' , (err, data) => {
         if (err) {
           console.error(err)
           return

@@ -36,23 +36,7 @@
 
     </div>
 </div>
-<script>
-    $(()=>{
-        getMessages()
-    })
 
-    function getMessages(){
-        $.get('/messages',(data)=>{
-            addMessages(data)
-        })
-    }
-    
-    function addMessages(message){
-        document.getElementById("au_code").innerHTML = message.au_code;
-        document.getElementById("ac_token").innerHTML = message.ac_token;
-        document.getElementById("rf_token").innerHTML = message.rf_token;
-    }
-</script>
 
 <!-- <script>
     var socket = io()

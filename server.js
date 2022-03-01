@@ -5,7 +5,7 @@ const { response } = require('express')
 var app = express()
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
-app.use(express.static(__dirname))
+// app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
@@ -43,9 +43,7 @@ app.get('/', (req, res) => {
             'ac_token': ac_token,
             'rf_token': rf_token
         }
-        app.get('/messages',(req,res)=>{
-            res.send(messages)
-        })
+        res.send(messages)
     });
 })
 

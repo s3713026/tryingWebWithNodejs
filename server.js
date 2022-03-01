@@ -50,7 +50,6 @@ app.get('/', (req, res) => {
                 return console.log(err);
             }
             console.log("The file was saved!");
-            res.send(ac_token)
         });
     });
 

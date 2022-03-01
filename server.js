@@ -103,25 +103,34 @@ app.get('/profile', (req, res) => {
             console.error(err)
             return
         }
-        console.log("read file success")
-        console.log(data)
-        var options = {
-            'method': 'GET',
-            'url': 'https://openapi.zalo.me/v2.0/oa/getprofile',
-            'headers': {
-                'Content-Type': 'application/json',
-                'access_token': 'HMNpK_3q2nL4OFHU__8C6ardyL_vx4rW6IV3MlVQCqirIgz0ZwmoG5njjKdlaWzRBrIC7EI682ObKDywxSCW3ZmohXlMz2ym91JMAihNR3GTEkbntSb7M04LjcFDW2nNV4BMQwYDKMbaQgf9ru02TmTzZJFoZoWBEn-r2StMDqqc9QngaEmYQYDne5_hYnbSK5VfQ9-2Tszt4Vr-hD9xUNO1WLoodNiO26BZAiEHG3e4Nx4EoguC4cGzhocigXnYOstj9hcWGZ52AF4WbVvs0rGZZI6Px1LWQpYxLfsb7bn_H8DblPOmNb9Ba1kPkMij8qoR1EN47KCo2u9JRcU3fSbpyku94W'
-            },
-            body: JSON.stringify({
-                "user_id": "8577983785350353613"
-            })
-    
-        };
-        request(options, function (error, response) {
-            if (error) throw new Error(error);
-            console.log(response.body);
-        });
-        
+        console.log("read file access token success")
+        fs.readFile('userid.js','utf8',(err,userdata)=>{
+            if(err){
+                console.error(err)
+                return
+            }
+            console.log("read file userid success")
+            userdata.forEach(element => {
+                console.log("PRINT" + element)
+                var options = {
+                    'method': 'GET',
+                    'url': 'https://openapi.zalo.me/v2.0/oa/getprofile',
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'access_token': JSON.parse(data).ac_token
+                    },
+                    body: JSON.stringify({
+                        element
+                    })
+            
+                };
+                request(options, function (error, response) {
+                    if (error) throw new Error(error);
+                    console.log(response.body);
+                    res.send(response.body)
+                });
+            });
+        })
     })
     
 })

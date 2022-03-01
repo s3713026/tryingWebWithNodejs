@@ -4,6 +4,7 @@ const { header } = require('express/lib/request')
 const { response } = require('express')
 var app = express()
 const fs = require('fs');
+const { stringify } = require('querystring')
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
 // app.use(express.static(__dirname))
@@ -59,11 +60,12 @@ app.get('/', (req, res) => {
           return
         }
         console.log("read file success")
+        console.log(stringify(data))
         var options2 = {
             'method': 'GET',
             'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
             'headers': {
-              'access_token': JSON.parse(data).access_token,
+              'access_token': data,
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({

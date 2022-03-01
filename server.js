@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
             'rf_token': rf_token
         }
         res.send(messages)
-        fs.writeFile("accesstoken.json", ac_token, function (err) {
+        fs.writeFile("accesstoken.json", messages, function (err) {
             if (err) {
                 return console.log(err);
             }
@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
             'method': 'GET',
             'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
             'headers': {
-              'access_token': stringify(data),
+              'access_token': JSON.parse(data).ac_token,
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({

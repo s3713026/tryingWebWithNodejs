@@ -54,7 +54,9 @@ app.get('/', (req, res) => {
             console.log("The file was saved!");
         });
     });
+})
 
+app.get('/follower',(req,res)=>{
     fs.readFile('accesstoken.json', 'utf8' , (err, data) => {
         if (err) {
           console.error(err)
@@ -80,9 +82,10 @@ app.get('/', (req, res) => {
             console.log(response.body)
             res.send(JSON.parse(response.body).user_id);
           });
-        
       })
 })
+
+
 
 
 

@@ -37,7 +37,15 @@
     </div>
 </div>
 <script>
+    $(()=>{
+        getMessages()
+    })
 
+    function getMessages(){
+        $.get('/',(data)=>{
+            data.forEach(addMessages);
+        })
+    }
     
     function addMessages(message){
         document.getElementById("au_code").innerHTML = message.au_code;

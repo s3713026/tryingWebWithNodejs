@@ -104,8 +104,8 @@ app.get('/profile', (req, res) => {
             return
         }
         console.log("read file access token success")
-        fs.readFile('userid.json','utf8',(err,userdata)=>{
-            if(err){
+        fs.readFile('userid.json', 'utf8', (err, userdata) => {
+            if (err) {
                 console.error(err)
                 return
             }
@@ -122,10 +122,10 @@ app.get('/profile', (req, res) => {
                         'Content-Type': 'application/json',
                         'access_token': JSON.parse(data).ac_token
                     },
-                    body:JSON.stringify({
-                        "user_id":element.user_id
+                    body: JSON.stringify({
+                        "user_id": element.user_id
                     })
-            
+
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
@@ -135,7 +135,50 @@ app.get('/profile', (req, res) => {
             });
         })
     })
-    
+
+})
+
+app.post('/sendmes', (req, res) => {
+    var request = require('request');
+    fs.readFile('accesstoken.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        console.log("read file access token success")
+        fs.readFile('userid.json', 'utf8', (err, userdata) => {
+            if (err) {
+                console.error(err)
+                return
+            }
+
+            console.log(userdata)
+            console.log("read file userid success")
+            var request = require('request');
+            var options = {
+                'method': 'POST',
+                'url': 'https://openapi.zalo.me/v2.0/oa/message',
+                'headers': {
+                    'access_token': JSON.parse(data).ac_token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "recipient": {
+                        "user_id": "8577983785350353613"
+                    },
+                    "message": {
+                        "text": "Thanks for theo dõi!"
+                    }
+                })
+
+            };
+            request(options, function (error, response) {
+                if (error) throw new Error(error);
+                console.log(response.body);
+            });
+        })
+    })
+
 })
 
 

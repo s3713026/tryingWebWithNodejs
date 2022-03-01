@@ -104,7 +104,7 @@ app.get('/profile', (req, res) => {
             return
         }
         console.log("read file access token success")
-        fs.readFile('userid.js','utf8',(err,userdata)=>{
+        fs.readFile('userid.json','utf8',(err,userdata)=>{
             if(err){
                 console.error(err)
                 return

@@ -9,8 +9,22 @@
 <div class="container">
     <br>
     <div class="jumbotron">
-        <h1 class="display-4">Send Message</h1>
+        <h1 class="display-4">Table information</h1>
         <br>
+        <table>
+            <tr>
+                <td>Authorization code</td>
+                <td id="au_code"></td>
+            </tr>
+            <tr>
+                <td>Access token</td>
+                <td id="ac_token"></td>
+            </tr>
+            <tr>
+                <td>Refresh token</td>
+                <td id="rf_token"></td>
+            </tr>
+        </table>
         <input id="name" class="form-control" placeholder="Name">
         <br>
         <textarea id="message" class="form-control" placeholder="Message"></textarea>
@@ -22,6 +36,15 @@
 
     </div>
 </div>
+<script>
+
+    
+    function addMessages(message){
+        document.getElementById("au_code").innerHTML = message.au_code;
+        document.getElementById("ac_token").innerHTML = message.ac_token;
+        document.getElementById("rf_token").innerHTML = message.rf_token;
+    }
+</script>
 
 <!-- <script>
     var socket = io()

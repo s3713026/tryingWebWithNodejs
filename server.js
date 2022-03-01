@@ -1,6 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 const { header } = require('express/lib/request')
+const { response } = require('express')
 var app = express()
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
@@ -11,7 +12,7 @@ app.get('/', (req, res) => {
     var objectValue = JSON.parse(string);
     var get_authorization_code = objectValue['code'];
     console.log("Authorization Code: " + get_authorization_code);
-    res.send(get_authorization_code);
+    // res.send(get_authorization_code);
 
     var request = require('request');
     var options = {
@@ -31,28 +32,14 @@ app.get('/', (req, res) => {
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
-        res.send(response.body)
+        var ac_token = response.body.access_token
+        var rf_token = response.body.refrest_token
+        var messages =[
+            {au_code: get_authorization_code,ac_token:ac_token,rf_token:rf_token},
+        ]
+        res.send(messages)
     });
 })
-
-// function processFile(token) {
-
-//     var get_OA_info = {
-//       'method': 'GET',
-//       'url': 'https://openapi.zalo.me/v2.0/oa/getoa',
-//       'headers': {
-//         'access_token': token
-//       }
-//     };
-
-//     http(get_OA_info, function (error, response) {
-//       if (error) throw new Error(error);
-//       var resultJSON2 = JSON.parse(response.body);
-//       var jsonContent2 = JSON.stringify(resultJSON2);
-
-//       console.log(jsonContent2);
-//     });
-//   }
 
 
 
@@ -62,8 +49,7 @@ app.get('/', (req, res) => {
 // app.use(bodyParser.json())
 // app.use(bodyParser.urlencoded({extended:false}))
 // var messages =[
-//     {name: 'Cuong',message:'Hi'},
-//     {name: 'Cuong2', message:'Hello'}
+//     {au_code: get_authorization_code,ac_token:response.body.,rf_token},
 // ]
 
 // app.get('/messages',(req,res)=>{

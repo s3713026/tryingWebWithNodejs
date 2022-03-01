@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
             'rf_token': rf_token
         }
         res.send(messages)
-        fs.writeFile("/accesttoken", ac_token, function (err) {
+        fs.writeFile("/files/accesstoken.json", ac_token, function (err) {
             if (err) {
                 return console.log(err);
             }
@@ -53,7 +53,33 @@ app.get('/', (req, res) => {
             res.send(ac_token)
         });
     });
+
+    fs.readFile('/files/accesstoken.txt', 'utf8' , (err, data) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        var options2 = {
+            'method': 'GET',
+            'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
+            'headers': {
+              'access_token': JSON.parse(data.body).access_token,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              "offset": 0,
+              "count": 10
+            })
+          
+          };
+          request(options2, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+          });
+        console.log(data)
+      })
 })
+
 
 
 

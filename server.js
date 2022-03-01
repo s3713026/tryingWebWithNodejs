@@ -109,7 +109,7 @@ app.get('/profile', (req, res) => {
                 console.error(err)
                 return
             }
-            
+
             console.log(userdata)
             console.log("read file userid success")
             JSON.parse(userdata).forEach(element => {
@@ -121,7 +121,7 @@ app.get('/profile', (req, res) => {
                         'Content-Type': 'application/json',
                         'access_token': JSON.parse(data).ac_token
                     },
-                    body:({
+                    body:JSON.stringify({
                         element
                     })
             

@@ -35,7 +35,7 @@ var options = {
         'grant_type': 'authorization_code'
     }
 };
-request1(options, function (error, response) {
+request1(options, function (error, response,next) {
     if (error) throw new Error(error);
     console.log(response.body);
     var infor = JSON.parse(response.body);
@@ -47,6 +47,7 @@ request1(options, function (error, response) {
         'rf_token': rf_token
     }
     res.send(messages)
+    next()
 });
 
 var option_follower = {
@@ -61,10 +62,11 @@ var option_follower = {
         "count": 10
     })
 };
-request2(option_follower, function (error, response) {
+request2(option_follower, function (error, response,next) {
     if (error) throw new Error(error);
     console.log(response.body);
     res.send(JSON.stringify(response.body))
+    next()
 });
 
 var server = app.listen(process.env.PORT || 3000, () => {

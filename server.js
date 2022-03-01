@@ -5,6 +5,9 @@ const { response } = require('express')
 var app = express()
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
+app.use(express.static(__dirname))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 
 app.get('/', (req, res) => {
     var url_page = req.query;
@@ -45,9 +48,7 @@ app.get('/', (req, res) => {
 
 
 
-// app.use(express.static(__dirname))
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended:false}))
+
 // var messages =[
 //     {au_code: get_authorization_code,ac_token:response.body.,rf_token},
 // ]

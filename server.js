@@ -7,8 +7,9 @@ var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
 // app.use(express.static(__dirname))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
+var ac_token = "";
 app.get('/', (req, res) => {
     var url_page = req.query;
     var string = JSON.stringify(url_page);
@@ -36,9 +37,9 @@ app.get('/', (req, res) => {
         if (error) throw new Error(error);
         console.log(response.body);
         var infor = JSON.parse(response.body);
-        var ac_token = infor.access_token
+        ac_token = infor.access_token
         var rf_token = infor.refresh_token
-        var messages ={
+        var messages = {
             'au_code': get_authorization_code,
             'ac_token': ac_token,
             'rf_token': rf_token
@@ -48,28 +49,23 @@ app.get('/', (req, res) => {
 })
 
 
-
-
-
-
-// var messages =[
-//     {au_code: get_authorization_code,ac_token:response.body.,rf_token},
-// ]
-
-// app.get('/messages',(req,res)=>{
-//     res.send(messages)
-// })
-
-// app.post('/messages',(req,res)=>{
-//     messages.push(req.body)
-//     // io.emit('message',req.body)
-//     res.sendStatus(200)
-// })
-
-
-// io.on('connection',(socket)=>{
-//     console.log('a user connected')
-// })
+var option_follower = {
+    'method': 'GET',
+    'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
+    'headers': {
+        'access_token': ac_token,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "offset": 0,
+        "count": 10
+    })
+};
+request(option_follower, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+    res.send(JSON.stringify(response.body))
+});
 
 var server = app.listen(process.env.PORT || 3000, () => {
     console.log('Server is listening on port', server.address().port)

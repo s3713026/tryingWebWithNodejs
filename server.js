@@ -39,13 +39,15 @@ app.get('/', (req, res) => {
         var infor = JSON.parse(response.body);
         var ac_token = infor.access_token
         var rf_token = infor.refresh_token
+        var messages ={
+            'au_code': get_authorization_code,
+            'ac_token': ac_token,
+            'rf_token': rf_token
+        }
+        res.send(messages)
     });
-    var messages ={
-        'au_code': get_authorization_code,
-        'ac_token': ac_token,
-        'rf_token': rf_token
-    }
-    res.send(messages)
+    
+    
 })
 
 

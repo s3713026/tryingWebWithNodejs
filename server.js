@@ -12,11 +12,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 var ac_token = "";
+var get_authorization_code = ""
 app.get('/', (req, res) => {
     var url_page = req.query;
     var string = JSON.stringify(url_page);
     var objectValue = JSON.parse(string);
-    var get_authorization_code = objectValue['code'];
+    get_authorization_code = objectValue['code'];
     console.log("Authorization Code: " + get_authorization_code);
     // res.send(get_authorization_code);
 })

@@ -109,6 +109,7 @@ app.get('/profile', (req, res) => {
                 console.error(err)
                 return
             }
+            console.log(userdata)
             console.log("read file userid success")
             JSON.parse(userdata).forEach(element => {
                 console.log("PRINT" + element)

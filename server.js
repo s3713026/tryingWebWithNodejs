@@ -59,12 +59,12 @@ app.get('/', (req, res) => {
 })
 
 // Lấy id người quan tâm
-app.get('/follower',(req,res)=>{
+app.get('/follower', (req, res) => {
     var request = require('request');
-    fs.readFile('accesstoken.json', 'utf8' , (err, data) => {
+    fs.readFile('accesstoken.json', 'utf8', (err, data) => {
         if (err) {
-          console.error(err)
-          return
+            console.error(err)
+            return
         }
         console.log("read file success")
         console.log(data)
@@ -72,22 +72,58 @@ app.get('/follower',(req,res)=>{
             'method': 'GET',
             'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
             'headers': {
-              'access_token': JSON.parse(data).ac_token,
-              'Content-Type': 'application/json'
+                'access_token': JSON.parse(data).ac_token,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              "offset": 0,
-              "count": 10
+                "offset": 0,
+                "count": 10
             })
-          
-          };
-          request(options2, function (error, response) {
+
+        };
+        request(options2, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body)
             var uid = JSON.parse(response.body).data.followers
             res.send(JSON.stringify(uid))
-          });
-      })
+            fs.writeFile("userid.json", JSON.stringify(messages), function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log("The file was saved!");
+            });
+        });
+    })
+})
+
+app.get('/profile', (req, res) => {
+    var request = require('request');
+    fs.readFile('accesstoken.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        console.log("read file success")
+        console.log(data)
+        var options = {
+            'method': 'GET',
+            'url': 'https://openapi.zalo.me/v2.0/oa/getprofile',
+            'headers': {
+                'Content-Type': 'application/json',
+                'access_token': 'HMNpK_3q2nL4OFHU__8C6ardyL_vx4rW6IV3MlVQCqirIgz0ZwmoG5njjKdlaWzRBrIC7EI682ObKDywxSCW3ZmohXlMz2ym91JMAihNR3GTEkbntSb7M04LjcFDW2nNV4BMQwYDKMbaQgf9ru02TmTzZJFoZoWBEn-r2StMDqqc9QngaEmYQYDne5_hYnbSK5VfQ9-2Tszt4Vr-hD9xUNO1WLoodNiO26BZAiEHG3e4Nx4EoguC4cGzhocigXnYOstj9hcWGZ52AF4WbVvs0rGZZI6Px1LWQpYxLfsb7bn_H8DblPOmNb9Ba1kPkMij8qoR1EN47KCo2u9JRcU3fSbpyku94W'
+            },
+            body: JSON.stringify({
+                "user_id": "8577983785350353613"
+            })
+    
+        };
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+        });
+        
+    })
+    
 })
 
 

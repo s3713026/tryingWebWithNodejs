@@ -60,12 +60,12 @@ app.get('/', (req, res) => {
           return
         }
         console.log("read file success")
-        console.log(stringify(data))
+        console.log(data)
         var options2 = {
             'method': 'GET',
             'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
             'headers': {
-              'access_token': data,
+              'access_token': JSON.parse(data).access_token,
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({

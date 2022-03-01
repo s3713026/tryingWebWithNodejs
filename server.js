@@ -6,6 +6,7 @@ var app = express()
 const fs = require('fs');
 const { stringify } = require('querystring')
 const { json } = require('body-parser')
+const { send } = require('process')
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
 // app.use(express.static(__dirname))
@@ -81,7 +82,9 @@ app.get('/follower',(req,res)=>{
           request(options2, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body)
-            res.send(JSON.parse(response.body).user_id);
+            var userid = JSON.parse(response.body).user_id;
+            var iduser = {"user_id":userid}
+            res.send(iduser)
           });
       })
 })

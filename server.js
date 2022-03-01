@@ -123,7 +123,7 @@ app.get('/profile', (req, res) => {
                         'access_token': JSON.parse(data).ac_token
                     },
                     body:JSON.stringify({
-                        userid
+                        "user_id":element.user_id
                     })
             
                 };

@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
             'method': 'GET',
             'url': 'https://openapi.zalo.me/v2.0/oa/getfollowers',
             'headers': {
-              'access_token': JSON.parse(data),
+              'access_token': JSON.stringify(data),
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({

@@ -183,7 +183,7 @@ app.get('/sendmes', (req, res) => {
 
 app.post('/webhook', (req, res) => {  
     console.log("User had send mess")
-    res.status(200).send('ok')
+    res.status(200)
     // let body = req.body;
     // // Checks this is an event from a page subscription
     // if (body.object === 'page') {

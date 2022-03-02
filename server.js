@@ -183,7 +183,7 @@ app.get('/sendmes', (req, res) => {
 
 app.post('/webhook', (req, res) => {  
     console.log("User had send mess")
-    res.status(200).send(ok)  
+    res.status(200).send("OK bro")  
     // var options = {
     //     'method': 'POST',
     //     'url': 'https://mukokistore.herokuapp.com/webhook',

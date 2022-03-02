@@ -182,9 +182,7 @@ app.get('/sendmes', (req, res) => {
 })
 
 app.post('/webhook', (req, res) => {  
- 
     let body = req.body;
-  
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
   
@@ -206,38 +204,33 @@ app.post('/webhook', (req, res) => {
   
   });
 
-  app.get('/webhook',(req,res)=>{
-    console.log('WEBHOOK_VERIFIED');
-    res.status(200).send("OK");
-  })
+// Adds support for GET requests to our webhook
+app.get('/webhook', (req, res) => {
 
-// // Adds support for GET requests to our webhook
-// app.get('/webhook', (req, res) => {
-
-//     // Your verify token. Should be a random string.
-//     let VERIFY_TOKEN = "yWjvLbkuOMEZWUcMaPF43ChOldw8H87P_Zm813H5m1M"
+    // Your verify token. Should be a random string.
+    let VERIFY_TOKEN = "yWjvLbkuOMEZWUcMaPF43ChOldw8H87P_Zm813H5m1M"
       
-//     // Parse the query params
-//     let mode = req.query['hub.mode'];
-//     let token = req.query['hub.verify_token'];
-//     let challenge = req.query['hub.challenge'];
+    // Parse the query params
+    let mode = req.query['hub.mode'];
+    let token = req.query['hub.verify_token'];
+    let challenge = req.query['hub.challenge'];
       
-//     // Checks if a token and mode is in the query string of the request
-//     if (mode && token) {
+    // Checks if a token and mode is in the query string of the request
+    if (mode && token) {
     
-//       // Checks the mode and token sent is correct
-//       if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+      // Checks the mode and token sent is correct
+      if (mode === 'subscribe' && token === VERIFY_TOKEN) {
         
-//         // Responds with the challenge token from the request
-//         console.log('WEBHOOK_VERIFIED');
-//         res.status(200).send(challenge);
+        // Responds with the challenge token from the request
+        console.log('WEBHOOK_VERIFIED');
+        res.status(200).send(challenge);
       
-//       } else {
-//         // Responds with '403 Forbidden' if verify tokens do not match
-//         res.sendStatus(403);      
-//       }
-//     }
-//   });
+      } else {
+        // Responds with '403 Forbidden' if verify tokens do not match
+        res.sendStatus(403);      
+      }
+    }
+  });
 
 
 

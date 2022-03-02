@@ -183,7 +183,7 @@ app.get('/sendmes', (req, res) => {
 
 app.post('/webhook',(req,res)=>{
     console.log("user had send mess")
-    console.log(JSON.stringify(res.body))
+    console.log(JSON.parse(res.body))
     res.status(200)
 })
 

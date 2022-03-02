@@ -183,18 +183,18 @@ app.get('/sendmes', (req, res) => {
 
 app.post('/webhook', (req, res) => {
     var request = require('request');
-    var options = {
-        'method': 'POST',
-        'url': 'https://mukokistore.herokuapp.com/webhook',
-        'headers': {
-            'Content-Type': 'application/json',
-            'X-ZEvent-Signature': 'mac = sha256(appid + data + timeStamp + OAsecretKey)'
-        }
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-    });
+    // var options = {
+    //     'method': 'POST',
+    //     'url': 'https://mukokistore.herokuapp.com/webhook',
+    //     'headers': {
+    //         'Content-Type': 'application/json',
+    //         'X-ZEvent-Signature': 'mac = sha256(appid + data + timeStamp + OAsecretKey)'
+    //     }
+    // };
+    // request(options, function (error, response) {
+    //     if (error) throw new Error(error);
+    //     console.log(response.body);
+    // });
     console.log("User had send mess")
     res.status(200).send("OK bro")
 

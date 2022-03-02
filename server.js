@@ -188,7 +188,7 @@ app.post('/webhook', (req, res) => {
         'url': 'https://mukokistore.herokuapp.com/webhook',
         'headers': {
             'Content-Type': 'application/json',
-            'X-ZEvent-Signature': 'mac = sha256(3264157168871710467 + data + timeStamp + OAsecretKey)'
+            'X-ZEvent-Signature': 'mac = sha256(appid + data + timeStamp + OAsecretKey)'
         }
     };
     request(options, function (error, response) {

@@ -138,7 +138,7 @@ app.get('/profile', (req, res) => {
 
 })
 
-app.post('/sendmes', (req, res) => {
+app.get('/sendmes', (req, res) => {
     var request = require('request');
     fs.readFile('accesstoken.json', 'utf8', (err, data) => {
         if (err) {
@@ -167,7 +167,7 @@ app.post('/sendmes', (req, res) => {
                         "user_id": "8577983785350353613"
                     },
                     "message": {
-                        "text": "Thanks for theo dõi!"
+                        "text": "Thanks for đăng kí theo dõi!"
                     }
                 })
 

@@ -181,36 +181,25 @@ app.get('/sendmes', (req, res) => {
 
 })
 
-app.post('/webhook', (req, res) => {  
+app.post('/webhook', (req, res) => {
     var request = require('request');
-    console.log("User had send mess")
-    res.status(200).send("OK bro")  
-    // var options = {
-    //     'method': 'POST',
-    //     'url': 'https://mukokistore.herokuapp.com/webhook',
-    //     'headers': {
-    //         'access_token': JSON.parse(data).ac_token,
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         "app_id": "3264157168871710467",
-    //         "oa_id": "579745863508352884",
-    //         "user_id_by_app": "5165559806240612925",
-    //         "event_name": "follow",
-    //         "timestamp": "1646213494363",
-    //         "source": "testing_webhook",
-    //         "follower": {
-    //           "id": "8616420576546575094"
-    //         }
-    //     })
-
-    // };
+    var options = {
+        'method': 'POST',
+        'url': 'https://mukokistore.herokuapp.com/webhook',
+        'headers': {
+            'Content-Type': 'application/json',
+            'X-ZEvent-Signature': 'mac = sha256(3264157168871710467 + data + timeStamp + OAsecretKey)'
+        }
+    };
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
     });
-  
-  });
+    console.log("User had send mess")
+    res.status(200).send("OK bro")
+
+
+});
 
 var server = app.listen(process.env.PORT || 3000, () => {
     console.log('Server is listening on port', server.address().port)

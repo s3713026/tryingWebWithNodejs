@@ -206,10 +206,10 @@ app.post('/webhook', (req, res) => {
   
   });
 
-//   app.get('/webhook',(req,res)=>{
-//     console.log('WEBHOOK_VERIFIED');
-//     res.status(200).send("OK");
-//   })
+  app.get('/webhook',(req,res)=>{
+    console.log('WEBHOOK_VERIFIED');
+    res.status(200).send("OK");
+  })
 
 // // Adds support for GET requests to our webhook
 // app.get('/webhook', (req, res) => {

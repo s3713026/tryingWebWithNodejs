@@ -181,7 +181,7 @@ app.get('/sendmes', (req, res) => {
 
 })
 
-app.post('/webhook', (req, res) => {
+app.get('/webhook', (req, res) => {
     console.log("User had send mess")
     res.status(200).send("OK bro")
     var request = require('request');

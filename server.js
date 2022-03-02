@@ -181,9 +181,9 @@ app.get('/sendmes', (req, res) => {
 
 })
 
-// app.get('/webhook',(req,res)=>{
-//     res.send("OK")
-// })
+app.get('/webhook',(req,res)=>{
+    res.send("OK")
+})
 
 
 

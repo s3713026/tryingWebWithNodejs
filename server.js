@@ -182,6 +182,7 @@ app.get('/sendmes', (req, res) => {
 })
 
 app.post('/webhook', (req, res) => {  
+    var request = require('request');
     console.log("User had send mess")
     res.status(200).send("OK bro")  
     // var options = {
@@ -204,10 +205,10 @@ app.post('/webhook', (req, res) => {
     //     })
 
     // };
-    // request(options, function (error, response) {
-    //     if (error) throw new Error(error);
-    //     console.log(response.body);
-    // });
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+    });
   
   });
 

@@ -185,40 +185,13 @@ app.post('/webhook',(req,res)=>{
     console.log("user had send mess")
     console.log(JSON.stringify(req.body))
     res.status(200)
+    app.get('/webhook', (req, res) => {
+        console.log("infor user")
+        res.status(200).send(JSON.stringify(req.body))
+    });
 })
 
-app.get('/webhook', (req, res) => {
-    console.log("infor user")
-    res.status(200).send("OK bro")
-    // var request = require('request');
-    // var options = {
-    //     'method': 'POST',
-    //     'url': 'https://mukokistore.herokuapp.com/webhook',
-    //     'headers': {
-    //         'Content-Type': 'application/json',
-    //         'X-ZEvent-Signature': 'mac = sha256(appid + data + timeStamp + OAsecretKey)'
-    //     },
-    //     body: JSON.stringify({
-    //         "appid": "3264157168871710467",
-    //         "oa_id": "579745863508352884",
-    //         "user_id_by_app": "5165559806240612925",
-    //         "event_name": "follow",
-    //         "timestamp": "1646212938699",
-    //         "source": "testing_webhook",
-    //         "follower": {
-    //             "id": "8577983785350353613"
-    //         }
-    //     })
 
-    // };
-    // request(options, function (error, response) {
-    //     if (error) throw new Error(error);
-    //     console.log(response.body);
-    // });
-
-
-
-});
 
 var server = app.listen(process.env.PORT || 3000, () => {
     console.log('Server is listening on port', server.address().port)

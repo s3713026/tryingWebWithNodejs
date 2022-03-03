@@ -13,12 +13,12 @@
         <br>
         <table border="1">
             <tr>
-                <td>Authorization code</td>
-                <td id="au_code"></td>
+                <td>User id</td>
+                <td id="u_id"></td>
             </tr>
             <tr>
-                <td>Access token</td>
-                <td id="ac_token"></td>
+                <td>User profile</td>
+                <td id="U_profile"></td>
             </tr>
             <tr>
                 <td>Refresh token</td>
@@ -37,6 +37,17 @@
     </div>
 </div>
 
+<script>
+    $(()=>{
+        getMessages()
+    })
+
+    function getMessages(){
+        $.get('https://mukokistore.herokuapp.com/follower',(data)=>{
+            document.getElementById('u_id').innerHTML = data
+        })
+    }
+</script>
 
 <!-- <script>
     var socket = io()

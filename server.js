@@ -9,7 +9,7 @@ const { json } = require('body-parser')
 const { send } = require('process')
 var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
-// app.use(express.static(__dirname))
+app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -185,11 +185,12 @@ app.post('/webhook',(req,res)=>{
     console.log("user had send mess")
     console.log(JSON.stringify(req.body))
     res.status(200)
-    app.get('/webhook', (req, res) => {
-        console.log("infor user")
-        res.status(200).send(JSON.stringify(req.body))
-    });
 })
+
+app.get('/webhook', (req, res) => {
+    console.log("infor user")
+    res.status(200).send(JSON.stringify(req.body))
+});
 
 
 

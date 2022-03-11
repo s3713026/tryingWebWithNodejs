@@ -1,15 +1,9 @@
 var express = require('express')
 var bodyParser = require('body-parser')
-const { header } = require('express/lib/request')
-const { response } = require('express')
 var app = express()
 const fs = require('fs');
-const { stringify } = require('querystring')
-const { json } = require('body-parser')
-const { send } = require('process')
-var http = require('http').Server(app)
 // var io = require('socket.io')(3000)
-// app.use(express.static(__dirname))
+app.use(express.static(__dirname))   
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
